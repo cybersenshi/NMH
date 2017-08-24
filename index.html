@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>
+        {{ page.name }} &middot; {{ store.name }}
+    </title>
+
+    <meta name="description" content="{{ page.description | strip_newlines | escape }}">
+    <meta name="keywords" content="{{ page.keywords }}">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cleartype" content="on">
+
+    <!--<link href="{{ theme | theme_css_url }}" rel="stylesheet">-->
+    <link href="style.css" rel="stylesheet">
+
+    <style type="text/css" media="screen">
+        body {
+        {% if theme.use_theme_background %}
+        background-image:url(/assets/themes/cooper/bg_cooper.png);
+        {% elsif store.background_image != blank %}
+        background-image:url({{ theme.background.url }});
+        {% endif %}
+        }
+    </style>
+
+    {{ page | open_graph_tags }}
+    {{ head_content }}
+
+    <script src="/assets/theme_cooper.js"></script>
+</head>
+
+<body id="{{ page.permalink }}-page" class="{{ page.permalink }} {{ page.category }}">
+{% if store.featured_promotion_text != blank %}
+<div id="promotion">
+    <strong>
+        {{ store.featured_promotion_text }}
+    </strong>
+</div>
+{% endif %}
+<div id="wrapper">
+    <div id="container">
+        <div id="mobile-header">
+            <a id="drawer_button" href="javascript:;">Open Nav</a>
+        </div>
+        <header>
+            <div id="store_info">
+                <!--{% if theme.show_store_name %}
+                    <h1 class="store_name">
+                        <a href="/" >
+                            {{store.name}}
+                        </a>
+                    </h1>
+                    {% endif %}-->
+                    <h1 class="store_name">
+                        <a href="/" >
+                            NMH Visual
+                        </a>
+                    </h1>
+            </div>
+            <!--<div id="banner">
+                {% if store.banner_image != blank %}
+                <a href="/"><img src="{{ theme.banner.url }}" alt="{{ store.name | escape }}"/></a>
+                {% endif %}
+            </div>-->
+        </header>
+
+        <main>
+            {% if notice != blank %}
+            <div id="success" class="flash-message">
+                <p>
+                    {{ notice }}
+                </p>
+            </div>
+            {% endif %}
+
+            {% if error != blank %}
+            <div id="error" class="flash-message">
+                <p>
+                    {{ error }}
+                </p>
+            </div>
+            {% endif %}
+
+            {{ page_content }}
+        </main>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="/products">
+                        Shop All
+                    </a>
+                </li>
+                {% for nav_item in collections.nav %}
+                <li id="collection_{{nav_item.id}}_link">
+                    <a href="{{nav_item.url}}">
+                        {{ nav_item.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <div id="content" {% if store.banner_image == blank and theme.show_store_name == false %} class="pad-top" {% endif %}>
+            <div class="row">
+                <div id="sidebar">
+                    <div class="sidebar-wrapper">
+                        {% if store.has_logo? and theme.show_logo %}
+                        <div id="logo">
+                            <a href="/">
+                                <img src="{{store.logo_url}}" alt="{{ store.name | escape }}" width="160" height="160">
+                            </a>
+                        </div>
+                        {% endif %}
+                        <div class="mobile-sidebar-content">
+                            <h2 id="sidebar_store_name">
+                                <a href="{{ store.url }}">
+                                    {{ store.name }}
+                                </a>
+                            </h2>
+
+                            <a href="http://www.storenvy.com/cart" class="checkout-link">
+                                Proceed to Checkout
+                            </a>
+
+
+                        <div id="searchbox">
+                            <form action="/search" method="GET" class="storefront-search">
+                                <input type="text" name="q" placeholder="Search" value="{{ search.term | escape }}" />
+                                <button type="submit">
+                                    <img src="/assets/storefront/search-icon.svg" width="15" height="15" alt="Search" />
+                                </button>
+                            </form>
+                        </div>
+
+                        <ul id="buttons">
+                            {% for page in pages.all %}
+                            <li>
+                                <a href="{{ page.url }}" class="{{ page.permalink }}">
+                                    {{ page.name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% if store.places != blank  %}
+
+                        <ul id="places">
+                            {% for place in store.places %}
+                            <li>
+                                <a href="{{place.url}}" target="_blank">
+                                    {{ place.name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <div class="mobile-sidebar-content">
+
+                            <a title="Open a Free online store!" href="http://www.storenvy.com/selling-on-storenvy?ctx=s&amp;src={{ store.url }}" target="_blank">
+                                Open Your Own Store
+                            </a>
+                        </div>
+                    </div><!-- end .sidebar-wrapper -->
+
+                </div><!-- end #sidebar -->
+
+                <div id="main">
+                    {% if notice != blank %}
+                    <div id="success" class="flash-message">
+                        <p>
+                            {{ notice }}
+                        </p>
+                    </div>
+                    {% endif %}
+
+                    {% if error != blank %}
+                    <div id="error" class="flash-message">
+                        <p>
+                            {{ error }}
+                        </p>
+                    </div>
+                    {% endif %}
+
+                    {{ page_content }}
+                </div><!-- end #main-->
+            </div>
+        </div><!-- end #content -->
+        <div id="footer">
+            <a href="http://www.storenvy.com/" id="powered_by_storenvy" class="storenvy_powered" target="_blank">Powered by Storenvy</a>
+            <div id="footer_info">
+                <ul>
+                    <li>
+                        <span class="footer-large">{{ store.name }}</span><br/>
+                        {% if store.description != blank %}
+                        {{ store.description | paragraphs }}
+                        {% endif %}
+                        {% if store.location != blank %}
+                        <span class="footer-medium">
+                            {{ store.location }}
+                        </span>
+                        <br>
+                        {% endif %}
+                        <span class="footer-small">&copy; {{ store.name }} {{ 'now' | date: "%Y" }}</span>
+                    </li>
+                    <li>
+                        <span class="footer-large">INFO</span>
+                        <br>
+                        <a href="{{ pages.contact.url }}">
+                            Contact
+                        </a>
+                        <br>
+                        {% if store.show_in_marketplace %}
+                        <a href="{{ store.marketplace_url }}" target="_blank">
+                            Marketplace Store
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
+            </div><!-- end #footer_info -->
+        </div><!-- end footer -->
+    </div><!-- end #container -->
+</div><!-- end #wrapper -->
+
+<!--{% if store.places != blank  %}
+<div class="social">
+    <ul>
+        {% if store.twitter_url %}
+        <li>
+            <a href="{{store.twitter_url}}" class="twitter">
+                <span class="fa fa-twitter"></span>
+            </a>
+        </li>
+        {% endif %}
+        {% if store.facebook_url %}
+        <li>
+            <a href="{{store.facebook_url}}" class="facebook">
+                <span class="fa fa-facebook"></span>
+            </a>
+        </li>
+        {% endif %}
+        {% if store.tumblr_url %}
+        <li>
+            <a href="{{store.tumblr_url}}" class="tumblr">
+                <span class="fa fa-tumblr"></span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</div><!-- /social
+{% endif %}-->
+<div class="social">
+    <ul>
+        <li class="clrtwit">
+            <a href="{{store.twitter_url}}">
+                <span class="fa fa-twitter"></span>
+            </a>
+        </li>
+        <li class="clrfb">
+            <a href="{{store.facebook_url}}">
+                <span class="fa fa-facebook"></span>
+            </a>
+        </li>
+        <li class="clrtumb">
+            <a href="{{store.tumblr_url}}">
+                <span class="fa fa-tumblr"></span>
+            </a>
+        </li>
+        <li class="clrinsta">
+            <a href="{{store.tumblr_url}}">
+                <span class="fa fa-instagram"></span>
+            </a>
+        </li>
+        <li class="etsy">
+            <a href="{{store.tumblr_url}}">
+                <span class="fa fa-etsy"></span>
+            </a>
+        </li>
+    </ul>
+</div><!-- /social -->
+
+</body>
+</html>
+​

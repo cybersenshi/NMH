@@ -1,0 +1,134 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* Social Sharing background-colors */
+.clrtwit {
+  background-color: #55acee; }
+
+.clrtwit:hover, .clrtwit:focus {
+  background-color: #3197e5; }
+
+.clrfb {
+  background-color: #3b5998; }
+
+.clrfb:hover, .clrfb:focus {
+  background-color: #224389; }
+
+.clrtumb {
+  background-color: #35465c; }
+
+.clrtumb:hover, .clrtumb:focus {
+  background-color: #21334b; }
+
+.clrinsta {
+  background-color: #3f729b; }
+
+.clrinsta:hover, .clrinsta:focus {
+  background-color: #275e8c; }
+
+.clrin {
+  background-color: #0077b5; }
+
+.clrin:hover, .clrin:focus {
+  background-color: #005b8c; }
+
+body {
+  background-color: #490a3d;
+  font-family: sans-serif; }
+
+a {
+  color: #8a9b0f; }
+
+header {
+  position: fixed;
+  left: -80px;
+  bottom: 50px;
+  width: 520px;
+  padding: 0.5em;
+  background-color: black;
+  font-size: 3rem;
+  text-transform: uppercase;
+  text-align: center;
+  transform: rotate(30deg); }
+
+header a {
+  color: whitesmoke;
+  text-decoration: none; }
+
+nav {
+  position: absolute;
+  top: 0;
+  width: 90vw;
+  margin-left: auto;
+  margin-right: auto; }
+
+nav li {
+  background-color: black; }
+
+main {
+  width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  background-color: whitesmoke; }
+
+.social {
+  position: absolute;
+  right: 0;
+  bottom: 0; }
+
+.social ul {
+  display: flex;
+  flex-direction: column; }
+
+.social li {
+  margin-left: 1rem;
+  padding: 1rem; }
+
+.social a {
+  color: whitesmoke; }
+
+.social li:hover, .social li:focus {
+  margin-left: -1rem;
+  padding-right: 2rem; }
+
+/*# sourceMappingURL=style.css.map */
